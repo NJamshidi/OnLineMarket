@@ -7,8 +7,10 @@ import java.sql.SQLException;
 public class BaseDao {
     private Connection connection;
 
-    public BaseDao() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
+
+    protected Connection getConnection() throws SQLException {
+
         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/onlineShop", "root", "123asPKb73!");
+        return connection;
     }
 }
