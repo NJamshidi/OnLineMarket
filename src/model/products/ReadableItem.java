@@ -2,7 +2,7 @@ package model.products;
 
 import model.enums.TypeOfReadableItems;
 
-public class ReadableItem extends Product{
+public class ReadableItem extends Product {
     private int numberOfPage;
     private TypeOfReadableItems typeOfReadableItem;
 
@@ -26,5 +26,14 @@ public class ReadableItem extends Product{
 
     public void setTypeOfReadableItem(TypeOfReadableItems typeOfReadableItem) {
         this.typeOfReadableItem = typeOfReadableItem;
+    }
+
+    @Override
+    public String toString() {
+        return "ReadableItem{" +
+                super.toString() + '\'' +
+                "numberOfPage=" + numberOfPage +
+                ", typeOfReadableItem=" + typeOfReadableItem +
+                '}';
     }
 }

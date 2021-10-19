@@ -17,4 +17,12 @@ public class Electronics extends Product{
     public void setBrandOfDevice(BrandOfDevice brandOfDevice) {
         this.brandOfDevice = brandOfDevice;
     }
+
+    @Override
+    public String toString() {
+        return "Electronics{" +
+                super.toString() + '\'' +
+                "brandOfDevice=" + brandOfDevice +
+                '}';
+    }
 }

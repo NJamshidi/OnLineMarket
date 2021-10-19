@@ -25,4 +25,11 @@ public class Product {
         this.amount = amount;
     }
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "count=" + count +
+                ", amount=" + amount +
+                '}';
+    }
 }

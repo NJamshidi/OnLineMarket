@@ -37,4 +37,14 @@ private TypeOfShoes typeOfShoe;
     public void setTypeOfShoe(TypeOfShoes typeOfShoe) {
         this.typeOfShoe = typeOfShoe;
     }
+
+    @Override
+    public String toString() {
+        return "Shoe{" +
+                super.toString() + '\'' +
+                "size=" + size +
+                ", color='" + color + '\'' +
+                ", typeOfShoe=" + typeOfShoe +
+                '}';
+    }
 }
