@@ -5,6 +5,7 @@ import model.Cart;
 import model.User;
 import model.products.Product;
 import service.CartService;
+import service.OrderService;
 import service.ProductService;
 import service.UserService;
 
@@ -70,8 +71,7 @@ public class Main {
                     break;
                 case 3:
                      cartId = addProductToCart(user);
-                     CartDao cartdao=new CartDao();
-                     cartdao.showAllOrders(cartId);
+                     cartService.showAllOfOrders(cartId);
 
                     break;
                 case 4:
@@ -125,59 +125,12 @@ public class Main {
                 case "d":
                     break menu;
                 default:
-                    OrderDao orderDao=new OrderDao();
+                    OrderService orderService=new OrderService();
                     int productId=Integer.parseInt(select);
-                   orderDao.addOrder(cartId,productId,type);
+                   orderService.addOrdersForUser(cartId,productId,type);
                     System.out.println("product added to order!");
             }
         }
     }
-  /*  private static void addProductToCart(User user) {
-        int count = userService.findCountOfItemsInCart(user);
-        if (count < 5) {
-            List<Product> products = productService.getAllProducts();
-            int productsSize = showAllProducts(products);
-            System.out.print("Enter number of product: ");
-            Scanner scanner =new Scanner(System.in);
-            int number = scanner.nextInt();
-            if (number > productsSize + 1) {
-                System.out.println("invalid Input");;
-                return;
-            }
-            Product product =   returnProductInListWithNumber(products, number - 1);
-            if (product == null)
-                return;
-            if (product.getCount() == 0) {
-                System.out.println("finished");
-                return;
-            }
 
-            System.out.println("your item : " + product.toString());
-            int countOfOrder = scanner.nextInt();
-            while (!countOfOrderIsValid(product, countOfOrder)) {
-                System.out.println("it is more than the allowed count");
-                countOfOrder = scanner.nextInt();
-            }
-            System.out.println(product.getTypeOfProducts().toString().toLowerCase());
-
-        } else
-            System.out.println("you can not add more to cart");
-    }
-
-
-
-    private static int showAllProducts(List<Product> lists) {
-        int index = 0;
-        for (Product list : lists) {
-            System.out.println((++index) + ")" + list);
-        }
-        return index;
-    }
-    private static Product returnProductInListWithNumber(List<Product> lists, int number) {
-        return lists.get(number);
-    }
-
-    private static boolean countOfOrderIsValid(Product product, int countOfOrder) {
-        return product.getCount() >= countOfOrder;
-    } */
 }

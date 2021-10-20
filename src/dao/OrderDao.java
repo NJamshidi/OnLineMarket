@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class OrderDao extends BaseDao{
     private static class SqlStatement {
         static final String INSERT_ORDER = "INSERT INTO orders  (cartId ,productId ,typeOfProduct ) VALUES (?,?,?)";}
-    public void addOrder(int cartId,int productId,String type) throws SQLException {
+    public void insertOrder(int cartId,int productId,String type) throws SQLException {
         Connection connection = getConnection();
         if (connection != null) {
             PreparedStatement statement = connection.prepareStatement(OrderDao.SqlStatement.INSERT_ORDER);

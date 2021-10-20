@@ -61,7 +61,7 @@ public class CartDao extends BaseDao {
         }
         return 0;
     }
-    public void showAllOrders(int cartId) throws SQLException {
+    public void getAllOrders(int cartId) throws SQLException {
         Connection connection = getConnection();
         if (connection != null) {
             String sql="SELECT * FROM orders left outer join electronics on orders.productId=electronics.id and orders.typeOfProduct='electronics'" +
