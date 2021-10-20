@@ -14,7 +14,6 @@ public class Main {
     static UserService userService = new UserService();
     static CartService cartService = new CartService();
     static ProductService productService = new ProductService();
-    ProductDao productDao = new ProductDao();
 
     public static void main(String[] args) throws SQLException {
         Scanner scanner = new Scanner(System.in);
@@ -24,18 +23,18 @@ public class Main {
 //        User user = userService.getByUserName(username);
 
 //        if (user == null) {
-            System.out.println("user not exit");
-            System.out.println("enter password:");
-            String pass = scanner.nextLine();
-            System.out.println("enter address:");
+        System.out.println("user not exit");
+        System.out.println("enter password:");
+        String pass = scanner.nextLine();
+        System.out.println("enter address:");
 
-            String address=scanner.next();
+        String address = scanner.next();
 //            boolean result = userService.addUser(username, pass ,address);
 //            if (result == true)
-            User user=new User(username, pass ,address);
-UserService userService =new UserService();
-userService.addUser(username,pass,address);
-            showMenu(user);
+        User user = new User(username, pass, address);
+        UserService userService = new UserService();
+        userService.addUser(username, pass, address);
+        showMenu(user);
 //            else
 //                return;
 //        } else {
@@ -61,9 +60,8 @@ userService.addUser(username,pass,address);
             int input = scanner.nextInt();
             switch (input) {
                 case 1:
-                    addProductToCart(user);
-                    showProductMenu(scanner);
-
+                    int cartId = addProductToCart(user);
+                    showProductMenu(scanner,cartId);
 
                     break;
                 case 2:
@@ -80,42 +78,52 @@ userService.addUser(username,pass,address);
 
     }
 
-    public static void addProductToCart(User user) throws SQLException {
-
-//      int count =  cartService.findCountOfProductByUserId(user.getId());
-//        if (count < 5) {
-
-            CartDao cartDao=new CartDao();
-            if(!cartDao.checkCartExist(user)){
-                cartDao.insertCart(user);
-
-            }else
-                System.out.println('2');
-//            cartDao.insertCart(user);
-//            cartService.addCart(user);
-//        } else
-//            System.out.println("you can not add more than 5 item!");
-
+    public static int addProductToCart(User user) throws SQLException {
+        CartDao cartDao = new CartDao();
+        if (!cartDao.checkCartExist(user)) {
+            cartDao.insertCart(user);
+            return cartDao.getCartId(user);
+        } else {
+            return cartDao.getCartId(user);
         }
-        public static void showProductMenu(Scanner scanner){
-            System.out.println("select categories");
-            System.out.println("1.electronics");
-            System.out.println("2.readableItems");
-            System.out.println("3.shoe");
-            int select= scanner.nextInt();
-            switch (select) {
-                case 1:
-                productDao.showElectronics();
-                break;
-                case 2:
-                    productDao.showReadableItems();
-                    break;
-                case 3:
-                    productDao.showShoe();
-                    break;
+    }
 
+    public static void showProductMenu(Scanner scanner, int cartId) throws SQLException {
+        String type = null;
+
+        menu:
+        while (true) {
+            System.out.println("select categories");
+            System.out.println("a.electronics");
+            System.out.println("b.readableItems");
+            System.out.println("c.shoe");
+            System.out.println("d.exit");
+            ProductDao productDao = new ProductDao();
+
+            String select = scanner.next();
+            switch (select) {
+                case "a":
+                    productDao.showElectronics();
+                    type = "electronics";
+                    break;
+                case "b":
+                    productDao.showReadableItems();
+                    type = "readableItem";
+
+                    break;
+                case "c":
+                    productDao.showShoe();
+                    type = "shoe";
+
+                    break;
+                case "d":
+                    break menu;
+                default:
+                    int productId=Integer.parseInt(select);
+                    addOrder(cartId,productId,type);
             }
         }
+    }
   /*  private static void addProductToCart(User user) {
         int count = userService.findCountOfItemsInCart(user);
         if (count < 5) {

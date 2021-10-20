@@ -15,6 +15,7 @@ public class CartDao extends BaseDao {
 
     private static class SqlStatement {
         static final String GET_BY_USERID = "SELECT * FROM carts where userId=(select idUsers from users where userName=? limit 1) AND cartStatus=0;";
+        static final String GET_CART_ID = "SELECT idcarts FROM carts where userId=(select idUsers from users where userName=? limit 1) AND cartStatus=0 limit 1;";
         static final String INSERT_CART = "INSERT INTO carts  (userid ,totalPrice ,totalCount ) VALUES (?,?,?)";
         static final String INSERT_CART2 = "INSERT INTO carts (userid ,totalPrice ,totalCount) SELECT idusers,0,0 FROM users where userName=?";
     }
@@ -45,6 +46,20 @@ public class CartDao extends BaseDao {
 
             statement.executeUpdate();
         }
+    }
+    public int getCartId(User user) throws SQLException {
+        Connection connection = getConnection();
+        if (connection != null) {
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlStatement.GET_CART_ID);
+            preparedStatement.setString(1, user.getUsername());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            int counter = 0;
+            while (resultSet.next()) {
+                counter=resultSet.getInt("idcarts");
+            }
+            return counter ;
+        }
+        return 0;
     }
 
     public int getCountOfProductsByUserId(int id) throws SQLException {

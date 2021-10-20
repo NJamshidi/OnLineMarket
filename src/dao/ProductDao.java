@@ -13,55 +13,53 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class ProductDao extends BaseDao {
 
-  public List<Electronics>  showElectronics() throws SQLException {
+  public void  showElectronics() throws SQLException {
       Connection connection = getConnection();
       if (connection != null) {
           List<Electronics> electronics = new ArrayList<>();
           Statement statement = connection.createStatement();
           ResultSet resultSet = statement.executeQuery("SELECT * FROM electronics");
           while (resultSet.next()) {
-              Electronics electronic = new Electronics();
-              electronics.add(new Electronics(resultSet.getInt("count"),resultSet.getDouble("amount"),resultSet.getString("brandOfDevice")));
+              System.out.println(resultSet.getInt("count")+" "+resultSet.getDouble("amount")+" "+resultSet.getString("brandOfDevice"));
           }
 
-          return electronics;
-      } else {
-          return Collections.emptyList();
+//          return electronics;
+//      } else {
+//          return Collections.emptyList();
       }
   }
-    public List<ReadableItem>  showReadableItems() throws SQLException {
+    public void  showReadableItems() throws SQLException {
         Connection connection = getConnection();
         if (connection != null) {
             List<ReadableItem> readableItems = new ArrayList<>();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM readableitems");
             while (resultSet.next()) {
-                ReadableItem readableItem = new ReadableItem();
-                readableItems.add(new ReadableItem(resultSet.getInt("count"),resultSet.getDouble("amount"),resultSet.getString("typeOfReadableItems")));
+                System.out.println(resultSet.getInt("count")+" "+resultSet.getDouble("amount")+ " "+resultSet.getString("typeOfReadableItems"));
             }
 
-            return readableItems;
-        } else {
-            return Collections.emptyList();
+//            return readableItems;
+//        } else {
+//            return Collections.emptyList();
         }
     }
-    public List<Shoe>  showShoe() throws SQLException {
+    public void  showShoe() throws SQLException {
         Connection connection = getConnection();
         if (connection != null) {
             List<Shoe> shoes = new ArrayList<>();
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM shoes");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM shoe");
             while (resultSet.next()) {
-                Shoe shoe = new Shoe();
-                shoes.add(new Shoe(resultSet.getInt("count"),resultSet.getDouble("amount"),resultSet.getInt("size"),resultSet.getString("color"),resultSet.getString("typeOfShoe")));
+                System.out.println(resultSet.getInt("count")+" "+resultSet.getDouble("amount")+" "+resultSet.getInt("size")+ " " +resultSet.getString("color")+" "+resultSet.getString("typeOfShoe"));
             }
 
-            return shoes;
-        } else {
-            return Collections.emptyList();
+//            return shoes;
+//        } else {
+//            return Collections.emptyList();
         }
     }
 
