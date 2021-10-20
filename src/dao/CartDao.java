@@ -4,11 +4,11 @@ package dao;
 import model.Cart;
 import model.User;
 import model.products.Product;
+import model.products.ReadableItem;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CartDao extends BaseDao {
 
@@ -61,6 +61,26 @@ public class CartDao extends BaseDao {
         }
         return 0;
     }
+    public void showAllOrders(int cartId) throws SQLException {
+        Connection connection = getConnection();
+        if (connection != null) {
+            String sql="SELECT * FROM orders left outer join electronics on orders.productId=electronics.id and orders.typeOfProduct='electronics'" +
+                    "left outer join readableitems on orders.productId=readableitems.idreadableItems and orders.typeOfProduct='readableitems' "+
+                    "left outer join shoe on orders.productId=shoe.idshoe and orders.typeOfProduct='shoe'  where orders.cartId=? " ;
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, cartId);
+
+           ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                System.out.println(resultSet.getInt("productId")+" "+resultSet.getInt("count")+" "+resultSet.getDouble("amount"));
+            }
+
+        }
+    }
+
+
+
 
     public int getCountOfProductsByUserId(int id) throws SQLException {
         int count = 0;

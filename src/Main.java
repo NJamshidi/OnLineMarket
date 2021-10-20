@@ -1,6 +1,7 @@
 import dao.CartDao;
 import dao.OrderDao;
 import dao.ProductDao;
+import model.Cart;
 import model.User;
 import model.products.Product;
 import service.CartService;
@@ -68,6 +69,10 @@ public class Main {
                 case 2:
                     break;
                 case 3:
+                     cartId = addProductToCart(user);
+                     CartDao cartdao=new CartDao();
+                     cartdao.showAllOrders(cartId);
+
                     break;
                 case 4:
                     break;

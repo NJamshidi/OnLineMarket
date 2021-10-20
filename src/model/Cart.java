@@ -27,6 +27,10 @@ public class Cart {
         this.totalCount = totalCount;
     }
 
+    public Cart() {
+
+    }
+
     public int getId() {
         return id;
     }
