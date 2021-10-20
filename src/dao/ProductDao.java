@@ -1,9 +1,6 @@
 package dao;
 
-import model.User;
-import model.enums.BrandOfDevice;
-import model.enums.TypeOfReadableItems;
-import model.enums.TypeOfShoes;
+
 import model.products.Electronics;
 import model.products.Product;
 import model.products.ReadableItem;

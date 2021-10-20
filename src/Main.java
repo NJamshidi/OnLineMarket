@@ -1,4 +1,5 @@
 import dao.CartDao;
+import dao.OrderDao;
 import dao.ProductDao;
 import model.User;
 import model.products.Product;
@@ -119,8 +120,10 @@ public class Main {
                 case "d":
                     break menu;
                 default:
+                    OrderDao orderDao=new OrderDao();
                     int productId=Integer.parseInt(select);
-                    addOrder(cartId,productId,type);
+                   orderDao.addOrder(cartId,productId,type);
+                    System.out.println("product added to order!");
             }
         }
     }
