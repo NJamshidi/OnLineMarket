@@ -6,11 +6,25 @@ import java.util.List;
 
 public class Cart {
     private int id;
-    private List<Product> products;
+    private User user;
+    private double totalPrice;
+    private boolean cartStatus;
+    private int totalCount;
 
-    public Cart(int id, List<Product> products) {
+
+    public Cart(int id, User user, double totalPrice, boolean cartStatus, int totalCount) {
         this.id = id;
-        this.products = products;
+        this.user = user;
+        this.totalPrice = totalPrice;
+        this.cartStatus = cartStatus;
+        this.totalCount = totalCount;
+    }
+
+    public Cart(User user, double totalPrice, boolean cartStatus, int totalCount) {
+        this.user = user;
+        this.totalPrice = totalPrice;
+        this.cartStatus = cartStatus;
+        this.totalCount = totalCount;
     }
 
     public int getId() {
@@ -21,19 +35,46 @@ public class Cart {
         this.id = id;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public User getUser() {
+        return user;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public boolean isCartStatus() {
+        return cartStatus;
+    }
+
+    public void setCartStatus(boolean cartStatus) {
+        this.cartStatus = cartStatus;
+    }
+
+    public int getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(int totalCount) {
+        this.totalCount = totalCount;
     }
 
     @Override
     public String toString() {
         return "Cart{" +
                 "id=" + id +
-                ", products=" + products +
+                ", user=" + user +
+                ", totalPrice=" + totalPrice +
+                ", cartStatus=" + cartStatus +
+                ", totalCount=" + totalCount +
                 '}';
     }
 }

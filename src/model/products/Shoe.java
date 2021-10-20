@@ -1,17 +1,30 @@
 package model.products;
 
+import model.enums.TypeOfProducts;
 import model.enums.TypeOfShoes;
 
 public class Shoe extends Product{
 private int size;
 private String color;
-private TypeOfShoes typeOfShoe;
-
-    public Shoe(int count, double amount, int size, String color, TypeOfShoes typeOfShoe) {
-        super(count, amount);
+private TypeOfShoes typeOfShoes;
+    public Shoe(int count, double cost, int sizeOfShoe, String color, TypeOfShoes typeOfShoes) {
+        super(count, cost);
         this.size = size;
         this.color = color;
-        this.typeOfShoe = typeOfShoe;
+        this.typeOfShoes = typeOfShoes;
+        typeOfProducts = TypeOfProducts.SHOES;
+    }
+
+    public Shoe(int id, int count, double cost, int sizeOfShoe, String color, TypeOfShoes typeOfShoes) {
+        super(id, count, cost);
+        this.size = size;
+        this.color = color;
+        this.typeOfShoes = typeOfShoes;
+        typeOfProducts = TypeOfProducts.SHOES;
+    }
+
+    public Shoe() {
+
     }
 
     public int getSize() {
@@ -31,11 +44,11 @@ private TypeOfShoes typeOfShoe;
     }
 
     public TypeOfShoes getTypeOfShoe() {
-        return typeOfShoe;
+        return typeOfShoes;
     }
 
     public void setTypeOfShoe(TypeOfShoes typeOfShoe) {
-        this.typeOfShoe = typeOfShoe;
+        this.typeOfShoes = typeOfShoe;
     }
 
     @Override
@@ -44,7 +57,7 @@ private TypeOfShoes typeOfShoe;
                 super.toString() + '\'' +
                 "size=" + size +
                 ", color='" + color + '\'' +
-                ", typeOfShoe=" + typeOfShoe +
+                ", typeOfShoe=" + typeOfShoes +
                 '}';
     }
 }

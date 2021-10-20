@@ -1,16 +1,55 @@
 package model.products;
 
+import model.enums.TypeOfProducts;
 import model.enums.TypeOfReadableItems;
 
 public class ReadableItem extends Product {
     private int numberOfPage;
-    private TypeOfReadableItems typeOfReadableItem;
+    private TypeOfReadableItems typeOfReadableItems;
 
-    public ReadableItem(int count, double amount, int numberOfPage, TypeOfReadableItems typeOfReadableItem) {
-        super(count, amount);
+    public ReadableItem(int count, double cost, int numberOfPage, TypeOfReadableItems typeOfReadableItems) {
+        super(count, cost);
         this.numberOfPage = numberOfPage;
-        this.typeOfReadableItem = typeOfReadableItem;
+        this.typeOfReadableItems = typeOfReadableItems;
+        typeOfProducts = TypeOfProducts.READABLE_ITEMS;
     }
+
+    public ReadableItem(int id, int count, double cost, int numberOfPage, TypeOfReadableItems typeOfReadableItems) {
+        super(id, count, cost);
+        this.numberOfPage = numberOfPage;
+        this.typeOfReadableItems = typeOfReadableItems;
+        typeOfProducts = TypeOfProducts.READABLE_ITEMS;
+    }
+
+    public ReadableItem(int count, double amount, TypeOfReadableItems typeOfReadableItems) {
+        super(count, amount);
+        this.typeOfReadableItems = typeOfReadableItems;
+    }
+
+    public ReadableItem(int id, int count, double amount, TypeOfReadableItems typeOfReadableItems) {
+        super(id, count, amount);
+        this.typeOfReadableItems = typeOfReadableItems;
+    }
+
+    public ReadableItem(int count, double amount, TypeOfProducts typeOfProducts, TypeOfReadableItems typeOfReadableItems) {
+        super(count, amount, typeOfProducts);
+        this.typeOfReadableItems = typeOfReadableItems;
+    }
+
+    public ReadableItem(int id, int count, double amount, TypeOfProducts typeOfProducts, TypeOfReadableItems typeOfReadableItems) {
+        super(id, count, amount, typeOfProducts);
+        this.typeOfReadableItems = typeOfReadableItems;
+    }
+
+    public ReadableItem(TypeOfReadableItems typeOfReadableItems) {
+        this.typeOfReadableItems = typeOfReadableItems;
+    }
+
+    public ReadableItem() {
+
+    }
+
+
 
     public int getNumberOfPage() {
         return numberOfPage;
@@ -21,11 +60,11 @@ public class ReadableItem extends Product {
     }
 
     public TypeOfReadableItems getTypeOfReadableItem() {
-        return typeOfReadableItem;
+        return typeOfReadableItems;
     }
 
-    public void setTypeOfReadableItem(TypeOfReadableItems typeOfReadableItem) {
-        this.typeOfReadableItem = typeOfReadableItem;
+    public void setTypeOfReadableItem(TypeOfReadableItems typeOfReadableItems) {
+        this.typeOfReadableItems = typeOfReadableItems;
     }
 
     @Override
@@ -33,7 +72,7 @@ public class ReadableItem extends Product {
         return "ReadableItem{" +
                 super.toString() + '\'' +
                 "numberOfPage=" + numberOfPage +
-                ", typeOfReadableItem=" + typeOfReadableItem +
+                ", typeOfReadableItem=" + typeOfReadableItems +
                 '}';
     }
 }
