@@ -20,7 +20,7 @@ public class CartDao extends BaseDao {
         static final String INSERT_CART2 = "INSERT INTO carts (userid ,totalPrice ,totalCount) SELECT idusers,0,0 FROM users where userName=?";
     }
 
-    public boolean checkCartExist(User user) throws SQLException {
+    public boolean checkCart(User user) throws SQLException {
         Connection connection = getConnection();
         if (connection != null) {
             PreparedStatement preparedStatement = connection.prepareStatement(SqlStatement.GET_BY_USERID);

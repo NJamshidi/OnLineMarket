@@ -85,12 +85,12 @@ public class Main {
     }
 
     public static int addProductToCart(User user) throws SQLException {
-        CartDao cartDao = new CartDao();
-        if (!cartDao.checkCartExist(user)) {
-            cartDao.insertCart(user);
-            return cartDao.getCartId(user);
+        CartService cartService = new CartService();
+        if (!cartService.checkCartExist(user)) {
+            cartService.addCartForUser(user);
+            return cartService.findCartId(user);
         } else {
-            return cartDao.getCartId(user);
+            return cartService.findCartId(user);
         }
     }
 
