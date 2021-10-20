@@ -1,25 +1,41 @@
 package service;
 
-import dao.ElectronicDao;
-import dao.ReadableItemDao;
-import dao.ShoeDao;
-import model.products.Product;
 
-import java.util.ArrayList;
-import java.util.List;
+import dao.ProductDao;
+import model.User;
 
-  public class ProductService {
-  /*      ElectronicDao electronicsDao = new ElectronicDao();
-        ShoeDao shoeDao =new ShoeDao();
-        ReadableItemDao readableItemDao = new ReadableItemDao();
-        public List<Product> getAllProducts()  {
+import java.sql.SQLException;
 
-                List<Product> products = new ArrayList<>();
-                products.addAll(electronicsDao.getAll("electronics"));
-                products.addAll(shoeDao.getAll("shoes"));
-                products.addAll(readableItemDao.getAll("readable_items"));
+public class ProductService {
+    ProductDao productDao=new ProductDao();
+    public void showAllOfElectronicProducts() {
 
-                return products;
+        try {
+            productDao.getAllElectronics();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-        } */
+
+    }
+    public void showAllOfReadableProducts() {
+
+        try {
+            productDao.getAllReadableItems();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+    public void showAllOfShoes() {
+
+        try {
+            productDao.getAllShoes();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
         }

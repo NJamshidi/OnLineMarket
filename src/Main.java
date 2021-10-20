@@ -104,21 +104,21 @@ public class Main {
             System.out.println("b.readableItems");
             System.out.println("c.shoe");
             System.out.println("d.exit");
-            ProductDao productDao = new ProductDao();
+            ProductService productService = new ProductService();
 
             String select = scanner.next();
             switch (select) {
                 case "a":
-                    productDao.showElectronics();
+                    productService.showAllOfElectronicProducts();
                     type = "electronics";
                     break;
                 case "b":
-                    productDao.showReadableItems();
+                    productService.showAllOfReadableProducts();
                     type = "readableItem";
 
                     break;
                 case "c":
-                    productDao.showShoe();
+                    productService.showAllOfShoes();
                     type = "shoe";
 
                     break;
