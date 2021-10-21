@@ -41,14 +41,6 @@ public class CartService {
 
         return 0;
     }
-    public void showAllOfOrders(int cartId) {
 
-        try {
-            cartDao.getAllOrders(cartId);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
 
 }

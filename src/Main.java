@@ -2,6 +2,7 @@ import dao.CartDao;
 import dao.OrderDao;
 import dao.ProductDao;
 import model.Cart;
+import model.Order;
 import model.User;
 import model.products.Product;
 import service.CartService;
@@ -17,40 +18,44 @@ public class Main {
     static UserService userService = new UserService();
     static CartService cartService = new CartService();
     static ProductService productService = new ProductService();
+    static OrderService orderService = new OrderService();
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Hello! Enter userName: ");
         String username = scanner.nextLine();
-//        User user = userService.getByUserName(username);
+        User user = userService.getByUserName(username);
 
-//        if (user == null) {
-        System.out.println("user not exit");
-        System.out.println("enter password:");
-        String pass = scanner.nextLine();
-        System.out.println("enter address:");
+        if (user == null) {
+            System.out.println("user not exit");
+            System.out.println("enter password:");
+            String pass = scanner.nextLine();
+            System.out.println("enter address:");
+            String address = scanner.next();
+            user = new User(username, pass, address);
+            userService.addUser(user);
+            showMenu(user);
 
-        String address = scanner.next();
-//            boolean result = userService.addUser(username, pass ,address);
-//            if (result == true)
-        User user = new User(username, pass, address);
-        UserService userService = new UserService();
-        userService.addUser(username, pass, address);
-        showMenu(user);
-//            else
-//                return;
-//        } else {
-//            System.out.println("enter password:");
-//            String pass = scanner.nextLine();
-//            if (user.getPassword().equals(pass))
-//                showMenu(user);
-////            else
-////                return;
-//        }
+        } else {
+            while (true) {
+                System.out.print("Enter your password: ");
+                String password = scanner.nextLine();
+                user = userService.getUserByUserNameAndPass(username, password);
+                if (user != null) {
+                    showMenu(user);
+
+
+                } else {
+                    System.out.println("the password is incorrect");
+                }
+            }
+        }
+
     }
 
-    public static void showMenu(User user) throws SQLException {
+
+    public static void showMenu(User user) {
         while (true) {
             System.out.println("*** Welcome to Online Market ***");
             System.out.println("1.Add product to cart");
@@ -64,18 +69,21 @@ public class Main {
             switch (input) {
                 case 1:
                     int cartId = addProductToCart(user);
-                    showProductMenu(scanner,cartId);
+                    showProductMenu(scanner, cartId);
 
                     break;
                 case 2:
+                    deleteProductFromCart(user, scanner);
                     break;
                 case 3:
-                     cartId = addProductToCart(user);
-                     cartService.showAllOfOrders(cartId);
+                    cartId = addProductToCart(user);
+                    orderService.showAllOfOrders(cartId);
 
                     break;
                 case 4:
                     break;
+                case 5:
+                    return;
                 default:
                     System.out.println("Invalid selection. Try again please!");
             }
@@ -84,7 +92,7 @@ public class Main {
 
     }
 
-    public static int addProductToCart(User user) throws SQLException {
+    public static int addProductToCart(User user) {
         CartService cartService = new CartService();
         if (!cartService.checkCartExist(user)) {
             cartService.addCartForUser(user);
@@ -94,7 +102,7 @@ public class Main {
         }
     }
 
-    public static void showProductMenu(Scanner scanner, int cartId) throws SQLException {
+    public static void showProductMenu(Scanner scanner, int cartId) {
         String type = null;
 
         menu:
@@ -125,12 +133,26 @@ public class Main {
                 case "d":
                     break menu;
                 default:
-                    OrderService orderService=new OrderService();
-                    int productId=Integer.parseInt(select);
-                   orderService.addOrdersForUser(cartId,productId,type);
+                    OrderService orderService = new OrderService();
+                    int productId = Integer.parseInt(select);
+                    orderService.addOrdersForUser(cartId, productId, type);
                     System.out.println("product added to order!");
             }
         }
     }
 
+    public static void deleteProductFromCart(User user, Scanner scanner) {
+        int cartId = cartService.findCartId(user);
+        ProductService productService = new ProductService();
+        productService.showAllOfElectronicProducts();
+        productService.showAllOfReadableProducts();
+        productService.showAllOfShoes();
+        OrderService orderService = new OrderService();
+        System.out.println("which product delete? enter id:");
+        int productId = scanner.nextInt();
+        orderService.deleteProductFromCart(productId, cartId);
+        System.out.println("product delete from order!");
+    }
 }
+
+

@@ -61,23 +61,8 @@ public class CartDao extends BaseDao {
         }
         return 0;
     }
-    public void getAllOrders(int cartId) throws SQLException {
-        Connection connection = getConnection();
-        if (connection != null) {
-            String sql="SELECT * FROM orders left outer join electronics on orders.productId=electronics.id and orders.typeOfProduct='electronics'" +
-                    "left outer join readableitems on orders.productId=readableitems.idreadableItems and orders.typeOfProduct='readableitems' "+
-                    "left outer join shoe on orders.productId=shoe.idshoe and orders.typeOfProduct='shoe'  where orders.cartId=? " ;
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, cartId);
 
-           ResultSet resultSet = statement.executeQuery();
 
-            while (resultSet.next()) {
-                System.out.println(resultSet.getInt("productId")+" "+resultSet.getInt("count")+" "+resultSet.getDouble("amount"));
-            }
-
-        }
-    }
 
 
 

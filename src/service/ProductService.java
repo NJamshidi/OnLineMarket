@@ -23,6 +23,7 @@ public class ProductService {
         try {
             productDao.getAllReadableItems();
         } catch (SQLException e) {
+
             e.printStackTrace();
         }
 

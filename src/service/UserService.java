@@ -19,17 +19,25 @@ public class UserService {
         return null;
     }
 
-    public boolean addUser(String username, String pass,String address) {
+    public boolean addUser(User user) {
 
         try {
-            userDao.insertUser(new User(username, pass ,address));
+            userDao.insertUser(user);
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        }}
+        public User getUserByUserNameAndPass(String username, String  password){
+            try {
+                return userDao.getUserByUserNameAndPass( username, password);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return null;
         }
 
     }
 
 
-}
+
