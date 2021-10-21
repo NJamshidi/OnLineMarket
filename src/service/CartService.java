@@ -42,5 +42,15 @@ public class CartService {
         return 0;
     }
 
+    public int getCountOfProductsByUserId(User user) {
+
+        try {
+            cartDao.getCountOfProductsByUserId(user.getId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
 
 }

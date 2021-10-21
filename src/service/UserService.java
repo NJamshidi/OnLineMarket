@@ -36,6 +36,9 @@ public class UserService {
             }
             return null;
         }
+        public int findCountOfProductsByUserId(User user){
+            return cartService.getCountOfProductsByUserId(user);
+        }
 
     }
 
