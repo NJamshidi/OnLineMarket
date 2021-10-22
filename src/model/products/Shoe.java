@@ -3,10 +3,11 @@ package model.products;
 import model.enums.TypeOfProducts;
 import model.enums.TypeOfShoes;
 
-public class Shoe extends Product{
-private int size;
-private String color;
-private TypeOfShoes typeOfShoes;
+public class Shoe extends Product {
+    private int size;
+    private String color;
+    private TypeOfShoes typeOfShoes;
+
     public Shoe(int count, double cost, int sizeOfShoe, String color, TypeOfShoes typeOfShoes) {
         super(count, cost);
         this.size = size;

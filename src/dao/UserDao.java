@@ -7,14 +7,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserDao extends BaseDao{
-    private static class SqlStatement{
-        static final String GET_BY_USERNAME="SELECT * FROM users where userName=?";
-        static final String INSERT_USER="INSERT INTO users  (userName, password ,address ) VALUES (?,?,?)";
-        static final String GET_BY_USER_PASS="SELECT * FROM users where username=? and password=?";
+public class UserDao extends BaseDao {
+    private static class SqlStatement {
+        static final String GET_BY_USERNAME = "SELECT * FROM users where userName=?";
+        static final String INSERT_USER = "INSERT INTO users  (userName, password ,address ) VALUES (?,?,?)";
+        static final String GET_BY_USER_PASS = "SELECT * FROM users where username=? and password=?";
     }
+
     public void insertUser(User user) throws SQLException {
-      Connection connection= getConnection();
+        Connection connection = getConnection();
         if (connection != null) {
             PreparedStatement statement = connection.prepareStatement(SqlStatement.INSERT_USER);
             statement.setString(1, user.getUsername());
@@ -24,8 +25,9 @@ public class UserDao extends BaseDao{
 
         }
     }
+
     public User getUserByUserName(String username) throws SQLException {
-        Connection connection= getConnection();
+        Connection connection = getConnection();
 
         if (connection != null) {
             PreparedStatement preparedStatement = connection.prepareStatement(SqlStatement.GET_BY_USERNAME);
@@ -37,12 +39,14 @@ public class UserDao extends BaseDao{
         }
         return null;
     }
+
     public User createUser(ResultSet resultSet) throws SQLException {
         System.out.println(resultSet.getString(2));
-        return new User(resultSet.getString(2), resultSet.getString(3),resultSet.getString(4));
+        return new User(resultSet.getString(2), resultSet.getString(3), resultSet.getString(4));
     }
+
     public User getUserByUserNameAndPass(String username, String password) throws SQLException {
-        Connection connection= getConnection();
+        Connection connection = getConnection();
 
         if (connection != null) {
             PreparedStatement preparedStatement = connection.prepareStatement(SqlStatement.GET_BY_USER_PASS);

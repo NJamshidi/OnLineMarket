@@ -12,9 +12,10 @@ public class CartService {
     public boolean checkCartExist(User user) {
 
         try {
-          return   cartDao.checkCart(user);
+            return cartDao.checkCart(user);
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("can not chek cart exist or not exist :" + e.getMessage());
+
         }
         return false;
 
@@ -25,7 +26,8 @@ public class CartService {
         try {
             cartDao.insertCart(user);
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("can not add cart for this user :" + e.getMessage());
+
         }
 
 
@@ -34,9 +36,10 @@ public class CartService {
     public int findCartId(User user) {
 
         try {
-         return   cartDao.getCartId(user);
+            return cartDao.getCartId(user);
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("can not find cartId :" + e.getMessage());
+
         }
 
         return -1;
@@ -45,9 +48,10 @@ public class CartService {
     public int getCountOfProductsByUserId(User user) {
 
         try {
-        return    cartDao.getCountOfProductsByUserId(user.getId());
+            return cartDao.getCountOfProductsByUserId(user.getId());
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("can not find count of products by userId :" + e.getMessage());
+
         }
 
         return 0;
@@ -57,51 +61,60 @@ public class CartService {
         try {
             cartDao.updateCount(cartId);
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("can not increase count of items in cart when add product in cart :" + e.getMessage());
+
         }
 
     }
+
     public void updateCountRemove(int cartId) {
         try {
             cartDao.updateCountRemove(cartId);
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("can not decrees count of items in cart when delete product in cart :" + e.getMessage());
+
         }
 
     }
+
     public double printTotlaPrice(int cartId) {
 
         try {
-            return    cartDao.getTotalPrice(cartId);
+            return cartDao.getTotalPrice(cartId);
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("can not print totalPrice in cart :" + e.getMessage());
+
         }
 
         return 0;
     }
-    public void updateTotalPrice(int cartId,int productId,String type) {
+
+    public void updateTotalPrice(int cartId, int productId, String type) {
         try {
-            cartDao.updateTPrice(cartId,productId,type);
+            cartDao.updateTPrice(cartId, productId, type);
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("can not increase totalPrice when add items in cart :" + e.getMessage());
+
         }
 
     }
-    public void updateTotalPriceRemove(int cartId,int orderId) {
+
+    public void updateTotalPriceRemove(int cartId, int orderId) {
         try {
-            cartDao.updateTPriceRemove(cartId,orderId);
+            cartDao.updateTPriceRemove(cartId, orderId);
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("can not decrees totalPrice when delete items in cart :" + e.getMessage());
+
         }
 
     }
+
     public void confirmOrder(int cartId) {
 
         try {
-                cartDao.confirm(cartId);
+            cartDao.confirm(cartId);
         } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("confirm order");
+            System.out.println("confirm order" + e.getMessage());
 
         }
 

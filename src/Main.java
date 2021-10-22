@@ -1,23 +1,14 @@
-import dao.CartDao;
-import dao.OrderDao;
-import dao.ProductDao;
-import model.Cart;
-import model.Order;
+
 import model.User;
-import model.products.Product;
 import service.CartService;
 import service.OrderService;
 import service.ProductService;
 import service.UserService;
-
-import java.sql.SQLException;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     static UserService userService = new UserService();
     static CartService cartService = new CartService();
-    static ProductService productService = new ProductService();
     static OrderService orderService = new OrderService();
 
     public static void main(String[] args) {
@@ -150,8 +141,7 @@ public class Main {
                     int productId = Integer.parseInt(select);
                     orderService.addOrdersForUser(cartId, productId, type);
                     cartService.updateCount(cartId);
-
-                    cartService.updateTotalPrice(cartId,productId,type);
+                    cartService.updateTotalPrice(cartId, productId, type);
                     System.out.println("product added to order!");
             }
         }
@@ -163,17 +153,15 @@ public class Main {
         orderService.showAllOfOrders(cartId);
         System.out.println("which order delete? enter id:");
         int orderId = scanner.nextInt();
-        cartService.updateTotalPriceRemove(cartId,orderId);
+        cartService.updateTotalPriceRemove(cartId, orderId);
         orderService.deleteProductFromCart(orderId);
         cartService.updateCountRemove(cartId);
-
         System.out.println("product delete from order!");
     }
 
     public static double printTotalPrice(User user) {
         int cartId = cartService.findCartId(user);
-
-     return cartService.printTotlaPrice(cartId);
+        return cartService.printTotlaPrice(cartId);
 
     }
 

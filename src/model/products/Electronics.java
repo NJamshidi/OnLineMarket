@@ -3,7 +3,7 @@ package model.products;
 import model.enums.BrandOfDevice;
 import model.enums.TypeOfProducts;
 
-public class Electronics extends Product{
+public class Electronics extends Product {
     private BrandOfDevice brandOfDevice;
     private Product producet;
 
@@ -22,7 +22,6 @@ public class Electronics extends Product{
     public Electronics() {
         super();
     }
-
 
 
     public BrandOfDevice getBrandOfDevice() {

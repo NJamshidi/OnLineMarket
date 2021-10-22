@@ -50,7 +50,6 @@ public class ReadableItem extends Product {
     }
 
 
-
     public int getNumberOfPage() {
         return numberOfPage;
     }

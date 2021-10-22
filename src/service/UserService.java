@@ -14,7 +14,7 @@ public class UserService {
         try {
             return userDao.getUserByUserName(userName);
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("can not find user by this username :" + e.getMessage());
         }
         return null;
     }
@@ -25,22 +25,25 @@ public class UserService {
             userDao.insertUser(user);
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("can not add user :" + e.getMessage());
             return false;
-        }}
-        public User getUserByUserNameAndPass(String username, String  password){
-            try {
-                return userDao.getUserByUserNameAndPass( username, password);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            return null;
         }
-        public int findCountOfProductsByUserId(User user){
-            return cartService.getCountOfProductsByUserId(user);
-        }
-
     }
+
+    public User getUserByUserNameAndPass(String username, String password) {
+        try {
+            return userDao.getUserByUserNameAndPass(username, password);
+        } catch (SQLException e) {
+            System.out.println("can not find each user by username and password :" + e.getMessage());
+        }
+        return null;
+    }
+
+    public int findCountOfProductsByUserId(User user) {
+        return cartService.getCountOfProductsByUserId(user);
+    }
+
+}
 
 
 

@@ -16,9 +16,9 @@ public class ProductService {
     public List<Electronics> showAllOfElectronicProducts() {
 
         try {
-        return    productDao.getAllElectronics();
+            return productDao.getAllElectronics();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("can not show electronics products :" + e.getMessage());
         }
         return null;
 
@@ -27,10 +27,10 @@ public class ProductService {
     public List<ReadableItem> showAllOfReadableProducts() {
 
         try {
-          return  productDao.getAllReadableItems();
+            return productDao.getAllReadableItems();
         } catch (SQLException e) {
+            System.out.println("can not show readable products :" + e.getMessage());
 
-            e.printStackTrace();
         }
 
         return null;
@@ -39,9 +39,9 @@ public class ProductService {
     public List<Shoe> showAllOfShoes() {
 
         try {
-         return   productDao.getAllShoes();
+            return productDao.getAllShoes();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("can not show shoe products :" + e.getMessage());
         }
         return null;
 

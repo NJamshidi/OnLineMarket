@@ -4,9 +4,9 @@ import model.enums.TypeOfProducts;
 
 public class Product {
     private int id;
-   private int count;
-   private double amount;
-   TypeOfProducts typeOfProducts;
+    private int count;
+    private double amount;
+    TypeOfProducts typeOfProducts;
 
     public Product(int count, double amount) {
         this.count = count;
@@ -18,7 +18,8 @@ public class Product {
         this.count = count;
         this.amount = amount;
     }
-    public Product( int count, double amount, TypeOfProducts typeOfProducts) {
+
+    public Product(int count, double amount, TypeOfProducts typeOfProducts) {
         this.count = count;
         this.amount = amount;
         this.typeOfProducts = typeOfProducts;

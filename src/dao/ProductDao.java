@@ -26,9 +26,8 @@ public class ProductDao extends BaseDao {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM electronics");
             while (resultSet.next()) {
                 Electronics electronics1 = new Electronics(resultSet.getInt(1), resultSet.getInt(2), resultSet.getDouble(3), BrandOfDevice.valueOf(resultSet.getString(4)));
-                electronics.add(electronics1);}
-
-
+                electronics.add(electronics1);
+            }
             return electronics;
         } else {
             return Collections.emptyList();
@@ -44,9 +43,7 @@ public class ProductDao extends BaseDao {
             while (resultSet.next()) {
                 ReadableItem readableItem = new ReadableItem(resultSet.getInt(1), resultSet.getInt(2), resultSet.getDouble(3), TypeOfReadableItems.valueOf(resultSet.getString(4)));
                 readableItems.add(readableItem);
-
             }
-
             return readableItems;
         } else {
             return Collections.emptyList();
