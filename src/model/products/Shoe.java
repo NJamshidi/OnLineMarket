@@ -12,7 +12,7 @@ private TypeOfShoes typeOfShoes;
         this.size = size;
         this.color = color;
         this.typeOfShoes = typeOfShoes;
-        typeOfProducts = TypeOfProducts.SHOES;
+        typeOfProducts = TypeOfProducts.SHOE;
     }
 
     public Shoe(int id, int count, double cost, int sizeOfShoe, String color, TypeOfShoes typeOfShoes) {
@@ -20,7 +20,7 @@ private TypeOfShoes typeOfShoes;
         this.size = size;
         this.color = color;
         this.typeOfShoes = typeOfShoes;
-        typeOfProducts = TypeOfProducts.SHOES;
+        typeOfProducts = TypeOfProducts.SHOE;
     }
 
     public Shoe() {

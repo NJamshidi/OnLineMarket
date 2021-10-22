@@ -11,14 +11,14 @@ public class ReadableItem extends Product {
         super(count, cost);
         this.numberOfPage = numberOfPage;
         this.typeOfReadableItems = typeOfReadableItems;
-        typeOfProducts = TypeOfProducts.READABLE_ITEMS;
+        typeOfProducts = TypeOfProducts.READABLEITEM;
     }
 
     public ReadableItem(int id, int count, double cost, int numberOfPage, TypeOfReadableItems typeOfReadableItems) {
         super(id, count, cost);
         this.numberOfPage = numberOfPage;
         this.typeOfReadableItems = typeOfReadableItems;
-        typeOfProducts = TypeOfProducts.READABLE_ITEMS;
+        typeOfProducts = TypeOfProducts.READABLEITEM;
     }
 
     public ReadableItem(int count, double amount, TypeOfReadableItems typeOfReadableItems) {

@@ -12,7 +12,7 @@ public class CartService {
     public boolean checkCartExist(User user) {
 
         try {
-            cartDao.checkCart(user);
+          return   cartDao.checkCart(user);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -34,18 +34,18 @@ public class CartService {
     public int findCartId(User user) {
 
         try {
-            cartDao.getCartId(user);
+         return   cartDao.getCartId(user);
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return 0;
+        return -1;
     }
 
     public int getCountOfProductsByUserId(User user) {
 
         try {
-            cartDao.getCountOfProductsByUserId(user.getId());
+        return    cartDao.getCountOfProductsByUserId(user.getId());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -53,4 +53,60 @@ public class CartService {
         return 0;
     }
 
+    public void updateCount(int cartId) {
+        try {
+            cartDao.updateCount(cartId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    public void updateCountRemove(int cartId) {
+        try {
+            cartDao.updateCountRemove(cartId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    public double printTotlaPrice(int cartId) {
+
+        try {
+            return    cartDao.getTotalPrice(cartId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+    public void updateTotalPrice(int cartId,int productId,String type) {
+        try {
+            cartDao.updateTPrice(cartId,productId,type);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    public void updateTotalPriceRemove(int cartId,int orderId) {
+        try {
+            cartDao.updateTPriceRemove(cartId,orderId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    public void confirmOrder(int cartId) {
+
+        try {
+                cartDao.confirm(cartId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("confirm order");
+
+        }
+
+    }
+
 }
+
+

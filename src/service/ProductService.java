@@ -3,40 +3,47 @@ package service;
 
 import dao.ProductDao;
 import model.User;
+import model.products.Electronics;
+import model.products.ReadableItem;
+import model.products.Shoe;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class ProductService {
-    ProductDao productDao=new ProductDao();
-    public void showAllOfElectronicProducts() {
+    ProductDao productDao = new ProductDao();
+
+    public List<Electronics> showAllOfElectronicProducts() {
 
         try {
-            productDao.getAllElectronics();
+        return    productDao.getAllElectronics();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        return null;
 
     }
-    public void showAllOfReadableProducts() {
+
+    public List<ReadableItem> showAllOfReadableProducts() {
 
         try {
-            productDao.getAllReadableItems();
+          return  productDao.getAllReadableItems();
         } catch (SQLException e) {
 
             e.printStackTrace();
         }
 
-
+        return null;
     }
-    public void showAllOfShoes() {
+
+    public List<Shoe> showAllOfShoes() {
 
         try {
-            productDao.getAllShoes();
+         return   productDao.getAllShoes();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        return null;
 
     }
-        }
+}

@@ -71,11 +71,12 @@ public class Main {
             switch (input) {
                 case 1:
                     int cartId = addProductToCart(user);
-                    showProductMenu(scanner, cartId,user);
+                    showProductMenu(scanner, cartId, user);
 
                     break;
                 case 2:
                     deleteProductFromCart(user, scanner);
+
                     break;
                 case 3:
                     cartId = addProductToCart(user);
@@ -83,8 +84,12 @@ public class Main {
 
                     break;
                 case 4:
+                    System.out.println(printTotalPrice(user));
                     break;
                 case 5:
+                    cartId = addProductToCart(user);
+                    cartService.confirmOrder(cartId);
+                    System.out.println("confirm order");
                     break;
                 case 6:
                     break;
@@ -99,9 +104,6 @@ public class Main {
     }
 
     public static int addProductToCart(User user) {
-
-
-        CartService cartService = new CartService();
         if (!cartService.checkCartExist(user)) {
             cartService.addCartForUser(user);
             return cartService.findCartId(user);
@@ -125,46 +127,56 @@ public class Main {
             String select = scanner.next();
             switch (select) {
                 case "a":
-                    productService.showAllOfElectronicProducts();
+                    System.out.println(productService.showAllOfElectronicProducts());
                     type = "electronics";
                     break;
                 case "b":
-                    productService.showAllOfReadableProducts();
-                    type = "readableItem";
+                    System.out.println(productService.showAllOfReadableProducts());
+                    type = "readableitem";
 
                     break;
                 case "c":
-                    productService.showAllOfShoes();
+                    System.out.println(productService.showAllOfShoes());
                     type = "shoe";
 
                     break;
                 case "d":
                     break menu;
                 default:
-                    int count = userService.findCountOfProductsByUserId(user);
-                    if (count < 5) {
-                        System.out.printf("your cart has %o items so you can add %o items%n", count, (5 - count));
-                        OrderService orderService = new OrderService();
-                        int productId = Integer.parseInt(select);
-                        orderService.addOrdersForUser(cartId, productId, type);
-                        System.out.println("product added to order!");
-                    }
+//                    int count = userService.findCountOfProductsByUserId(user);
+//                    if (count < 5) {
+//                        System.out.printf("your cart has %o items so you can add %o items%n", count, (5 - count));
+                    OrderService orderService = new OrderService();
+                    int productId = Integer.parseInt(select);
+                    orderService.addOrdersForUser(cartId, productId, type);
+                    cartService.updateCount(cartId);
+
+                    cartService.updateTotalPrice(cartId,productId,type);
+                    System.out.println("product added to order!");
             }
         }
     }
+//    }
 
     public static void deleteProductFromCart(User user, Scanner scanner) {
         int cartId = cartService.findCartId(user);
-        ProductService productService = new ProductService();
-        productService.showAllOfElectronicProducts();
-        productService.showAllOfReadableProducts();
-        productService.showAllOfShoes();
-        OrderService orderService = new OrderService();
-        System.out.println("which product delete? enter id:");
-        int productId = scanner.nextInt();
-        orderService.deleteProductFromCart(productId, cartId);
+        orderService.showAllOfOrders(cartId);
+        System.out.println("which order delete? enter id:");
+        int orderId = scanner.nextInt();
+        cartService.updateTotalPriceRemove(cartId,orderId);
+        orderService.deleteProductFromCart(orderId);
+        cartService.updateCountRemove(cartId);
+
         System.out.println("product delete from order!");
     }
+
+    public static double printTotalPrice(User user) {
+        int cartId = cartService.findCartId(user);
+
+     return cartService.printTotlaPrice(cartId);
+
+    }
+
 }
 
 

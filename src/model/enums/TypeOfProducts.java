@@ -2,8 +2,8 @@ package model.enums;
 
 public enum TypeOfProducts {
     ELECTRONICS("electronics"),
-    SHOES("shoes"),
-    READABLE_ITEMS("readable_items"),
+    SHOE("shoe"),
+    READABLEITEM("readableitem"),
     NOT_SET("not_set");
 
     private final String name;

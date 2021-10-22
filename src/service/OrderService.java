@@ -27,10 +27,10 @@ public class OrderService {
         }
 
     }
-    public void deleteProductFromCart(int productId,int cartId){
+    public void deleteProductFromCart(int orderId){
 
         try {
-            orderDao.remove(productId,cartId);
+            orderDao.remove(orderId);
         } catch (SQLException e) {
             e.printStackTrace();
         }
