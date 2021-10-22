@@ -8,18 +8,22 @@ public class User {
     private int id;
     private String username;
     private String password;
-    private List<Product> products;
+    private String address;
 
-    public User(int id, String username, String password) {
+    public User(int id, String username, String password, String address) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.address = address;
     }
 
-    public User(String username, String password) {
+    public User(String username, String password, String address) {
         this.username = username;
         this.password = password;
+        this.address = address;
     }
+
+
 
     public int getId() {
         return id;
@@ -45,11 +49,11 @@ public class User {
         this.password = password;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public String getAddress() {
+        return address;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

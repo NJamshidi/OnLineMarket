@@ -10,5 +10,11 @@ public enum TypeOfReadableItems {
     TypeOfReadableItems(String name) {
         this.name = name;
     }
-
+    public TypeOfReadableItems getValue(String name) {
+        for (TypeOfReadableItems type : values()) {
+            if (type.name.equalsIgnoreCase(name.trim()))
+                return type;
+        }
+        return NOT_SET;
+    }
 }
