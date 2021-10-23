@@ -4,6 +4,7 @@ import service.CartService;
 import service.OrderService;
 import service.ProductService;
 import service.UserService;
+
 import java.util.Scanner;
 
 public class Main {
@@ -120,33 +121,37 @@ public class Main {
                 case "a":
                     System.out.println(productService.showAllOfElectronicProducts());
                     type = "electronics";
+                    System.out.println("select productId for add to cart: ");
                     break;
                 case "b":
                     System.out.println(productService.showAllOfReadableProducts());
                     type = "readableitem";
+                    System.out.println("select productId for add to cart: ");
 
                     break;
                 case "c":
                     System.out.println(productService.showAllOfShoes());
                     type = "shoe";
+                    System.out.println("select productId for add to cart: ");
 
                     break;
                 case "d":
                     break menu;
                 default:
-//                    int count = userService.findCountOfProductsByUserId(user);
-//                    if (count < 5) {
-//                        System.out.printf("your cart has %o items so you can add %o items%n", count, (5 - count));
-                    OrderService orderService = new OrderService();
-                    int productId = Integer.parseInt(select);
-                    orderService.addOrdersForUser(cartId, productId, type);
-                    cartService.updateCount(cartId);
-                    cartService.updateTotalPrice(cartId, productId, type);
-                    System.out.println("product added to order!");
+                    int count = userService.findCountOfProductsByUserId(user);
+                    if (count < 5) {
+                        System.out.printf("your cart has %o items so you can add %o items%n", count, (5 - count));
+                        OrderService orderService = new OrderService();
+                        int productId = Integer.parseInt(select);
+                        orderService.addOrdersForUser(cartId, productId, type);
+                        cartService.updateCount(cartId);
+                        cartService.updateTotalPrice(cartId, productId, type);
+                        System.out.println("product added to order!");
+                    }else
+                        System.out.println("can not add more than 5 items!");
             }
         }
     }
-//    }
 
     public static void deleteProductFromCart(User user, Scanner scanner) {
         int cartId = cartService.findCartId(user);

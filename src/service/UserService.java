@@ -2,7 +2,6 @@ package service;
 
 import dao.UserDao;
 import model.User;
-import model.products.Product;
 
 import java.sql.SQLException;
 

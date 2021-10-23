@@ -48,7 +48,7 @@ public class CartService {
     public int getCountOfProductsByUserId(User user) {
 
         try {
-            return cartDao.getCountOfProductsByUserId(user.getId());
+            return cartDao.getCountOfProductsByUserId(user.getUsername());
         } catch (SQLException e) {
             System.out.println("can not find count of products by userId :" + e.getMessage());
 

@@ -94,17 +94,20 @@ public class CartDao extends BaseDao {
 
     }
 
-    public int getCountOfProductsByUserId(int id) throws SQLException {
+    public int getCountOfProductsByUserId(String username) throws SQLException {
         int count = 0;
         Connection connection = getConnection();
         if (connection != null) {
             PreparedStatement preparedStatement = connection.prepareStatement(SqlStatement.GET_BY_USERID);
-            preparedStatement.setInt(1, id);
+            preparedStatement.setString(1, username);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next())
-                count++;
+            int counter = 0;
+            while (resultSet.next()) {
+                counter = resultSet.getInt("totalCount");
+            }
+            return counter;
         }
-        return count;
+        return 0;
     }
 
     public double getTotalPrice(int cartId) throws SQLException {
