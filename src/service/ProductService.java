@@ -46,4 +46,24 @@ public class ProductService {
         return null;
 
     }
+    public void updateCountOfShop(int productId,String type){
+      try {
+          productDao.updateCoutOfProductsInShop(productId, type);
+      } catch (SQLException e) {
+        System.out.println("can not update count of all products in shop:" + e.getMessage());
+    }
+
 }
+    public int checkCountOfProductsInShop(int productId,String type) {
+        try {
+            return productDao.checkCountOfProductsInShop(productId, type);
+        } catch (SQLException e) {
+            System.out.println("can not check count of all products in shop:" + e.getMessage());
+        }
+return 0;
+    }
+
+
+    }
+
+

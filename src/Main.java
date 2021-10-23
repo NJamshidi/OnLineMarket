@@ -12,6 +12,7 @@ public class Main {
     static CartService cartService = new CartService();
     static OrderService orderService = new OrderService();
 
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -84,6 +85,12 @@ public class Main {
                     System.out.println("confirm order");
                     break;
                 case 6:
+                    ProductService productService = new ProductService();
+
+                    System.out.println(productService.showAllOfElectronicProducts());
+                    System.out.println(productService.showAllOfReadableProducts());
+                    System.out.println(productService.showAllOfShoes());
+
                     break;
                 case 7:
                     return;
@@ -143,15 +150,22 @@ public class Main {
                         System.out.printf("your cart has %o items so you can add %o items%n", count, (5 - count));
                         OrderService orderService = new OrderService();
                         int productId = Integer.parseInt(select);
-                        orderService.addOrdersForUser(cartId, productId, type);
-                        cartService.updateCount(cartId);
-                        cartService.updateTotalPrice(cartId, productId, type);
-                        System.out.println("product added to order!");
-                    }else
+                        productService.updateCountOfShop(productId, type);
+                        int contOfAllProductsInShop = productService.checkCountOfProductsInShop(productId, type);
+                        if (contOfAllProductsInShop != 0) {
+                            orderService.addOrdersForUser(cartId, productId, type);
+                            cartService.updateCount(cartId);
+                            cartService.updateTotalPrice(cartId, productId, type);
+                            System.out.println("product added to order!");
+                        } else {
+                            System.out.println("this product not exist!");
+                        }
+                    } else
                         System.out.println("can not add more than 5 items!");
             }
         }
     }
+
 
     public static void deleteProductFromCart(User user, Scanner scanner) {
         int cartId = cartService.findCartId(user);
